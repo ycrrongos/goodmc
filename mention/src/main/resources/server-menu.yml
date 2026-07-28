@@ -1,0 +1,9 @@
+buttons:
+  - slot: 24
+    material: WRITABLE_BOOK
+    name: "提及玩家"
+    lore: ["等同 /@"]
+    pick-player: true
+    chat-input: true
+    command: "@ {player} {input}"
+    prompt: "请输入提及消息，输入取消可放弃"

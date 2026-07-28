@@ -1,0 +1,22 @@
+name: Server-Vision
+version: '${version}'
+main: com.servervision.ServerVisionPlugin
+api-version: '1.21'
+description: 自由视角与无限夜视
+author: 爱玩电脑的小融融 (ycrrongos)
+
+commands:
+  freecam:
+    description: 切换自由视角模式
+    usage: /freecam
+  fullbright:
+    description: 切换无限夜视效果
+    usage: /fullbright
+
+permissions:
+  goodmc.freecam:
+    description: 使用自由视角指令
+    default: true
+  goodmc.fullbright:
+    description: 切换无限夜视
+    default: true

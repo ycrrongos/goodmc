@@ -1,0 +1,8 @@
+buttons:
+  - slot: 16
+    material: PLAYER_HEAD
+    name: "假人帮助"
+    lore:
+      - "/player <名> spawn"
+      - "/player <名> attack continuous"
+    command: "player"

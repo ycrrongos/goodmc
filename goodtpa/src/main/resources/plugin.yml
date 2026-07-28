@@ -1,0 +1,52 @@
+name: GoodTPA
+version: '${version}'
+main: com.goodtpa.GoodTpaPlugin
+api-version: '1.21'
+description: TPA、路径点与死亡点返回
+author: ycrrongos
+
+commands:
+  tpa:
+    description: 请求传送到一名玩家身边（无参数打开传送菜单）
+    usage: /tpa [玩家]
+  tpahere:
+    description: 请求一名玩家传送到你身边
+    usage: /tpahere <玩家>
+  tpaccept:
+    description: 接受传送请求
+    usage: /tpaccept <玩家>
+  tpadeny:
+    description: 拒绝传送请求
+    usage: /tpadeny <玩家>
+  tpaback:
+    description: 返回传送前的位置
+    usage: /tpaback
+  tpatimeout:
+    description: 设置他人向你发起传送请求的失效时间
+    usage: /tpatimeout [秒数]
+  tpamenu:
+    description: 打开传送菜单
+    usage: /tpamenu
+  back:
+    description: 返回上次死亡点
+    usage: /back
+  waypoint:
+    description: 打开路径点界面
+    usage: /waypoint [back]
+  waypointbar:
+    description: 原版路径点命令
+    usage: /waypointbar [参数]
+
+permissions:
+  goodmc.tpa:
+    description: 使用传送相关指令
+    default: true
+  goodmc.back:
+    description: 返回死亡点
+    default: true
+  goodmc.waypoint:
+    description: 使用路径点功能
+    default: true
+  goodmc.waypoint.admin:
+    description: 删除所有玩家的公开路径点
+    default: op

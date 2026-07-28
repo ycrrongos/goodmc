@@ -1,0 +1,16 @@
+name: Mention
+version: '${version}'
+main: com.mention.MentionPlugin
+api-version: '1.21'
+description: 以屏幕标题提及玩家
+author: 爱玩电脑的小融融 (ycrrongos)
+
+commands:
+  "@":
+    description: 以屏幕标题提及一名玩家
+    usage: /@ <玩家> <消息>
+
+permissions:
+  goodmc.at:
+    description: 使用 /@ 提及玩家
+    default: true

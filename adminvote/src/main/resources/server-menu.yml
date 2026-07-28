@@ -1,0 +1,10 @@
+buttons:
+  - slot: 37
+    material: ENDER_PEARL
+    name: "静默传送"
+    lore:
+      - "等同 /tph"
+      - "选择玩家传送到其身边"
+    pick-player: true
+    command: "tph {player}"
+    permission: "goodmc.tph"

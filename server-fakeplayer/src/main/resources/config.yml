@@ -1,0 +1,15 @@
+# Maximum fake players on the server at once
+max-fake-players: 20
+
+# Allow spawning offline (cracked-style) UUIDs without Mojang lookup
+allow-offline-players: true
+
+# Default gamemode for spawned fake players: SURVIVAL / CREATIVE / ADVENTURE / SPECTATOR
+default-gamemode: SURVIVAL
+
+# AuthMe soft integration: auto force-login fake players after spawn/join
+authme:
+  auto-login: true
+
+commands:
+  player: true

@@ -1,0 +1,16 @@
+tpa:
+  default-timeout-seconds: 60
+  min-timeout-seconds: 15
+  max-timeout-seconds: 300
+
+commands:
+  tpa: true
+  tpahere: true
+  tpaccept: true
+  tpadeny: true
+  tpaback: true
+  tpatimeout: true
+  tpamenu: true
+  back: true
+  waypoint: true
+  waypointbar: true

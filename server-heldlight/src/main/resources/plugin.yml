@@ -1,0 +1,11 @@
+name: Server-HeldLight
+version: '${version}'
+main: com.serverheldlight.ServerHeldLightPlugin
+api-version: '1.21'
+description: 手持发光方块时提供动态光照
+author: 爱玩电脑的小融融 (ycrrongos)
+
+permissions:
+  goodmc.heldlight:
+    description: 手持发光方块时提供光照
+    default: true

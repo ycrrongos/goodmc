@@ -1,0 +1,19 @@
+buttons:
+  - slot: 10
+    material: ENDER_PEARL
+    name: "传送菜单"
+    lore:
+      - "打开 GoodTPA 传送菜单"
+    command: "tpa"
+  - slot: 20
+    material: RECOVERY_COMPASS
+    name: "返回死亡点"
+    lore:
+      - "等同 /back"
+    command: "back"
+  - slot: 22
+    material: LODESTONE
+    name: "路径点"
+    lore:
+      - "等同 /waypoint"
+    command: "waypoint"

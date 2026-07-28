@@ -1,0 +1,13 @@
+commands:
+  adminvote: true
+  tph: true
+
+admin-vote:
+  # 普通原版管理员指令的同意比例（百分比，1-100）
+  # 例如 51 表示需要超过半数玩家同意；100 表示全体同意
+  approval-percent: 80
+  # gamerule 指令在多名玩家在线时的同意比例（百分比）
+  # 设为 100 即全体同意；设为 51 则与上面相同规则
+  gamerule-approval-percent: 100
+  # 至少多少名玩家在线时，gamerule 使用上面的 gamerule-approval-percent
+  gamerule-special-min-online: 2

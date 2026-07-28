@@ -1,0 +1,7 @@
+menu-item:
+  material: CLOCK
+  name: "服务器菜单"
+
+# 本地按钮优先于各插件 server-menu.yml 同槽贡献
+# 支持 pick-player / chat-input 与 {player}/{input} 占位符
+buttons: []

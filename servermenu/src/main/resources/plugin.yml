@@ -1,0 +1,20 @@
+name: ServerMenu
+version: '${version}'
+main: com.servermenu.ServerMenuPlugin
+api-version: '1.21'
+description: 可配置服务器菜单（自动发现各插件 server-menu.yml）
+author: ycrrongos
+softdepend: [GoodTPA, GoodMC, Server-Vision, Mention, QQBridge, AdminVote, Server-HeldLight, Server-FakePlayer]
+
+commands:
+  servermenu:
+    description: 领取服务器菜单或重载
+    usage: /servermenu [open|reload]
+
+permissions:
+  goodmc.menu:
+    description: 领取并使用服务器菜单
+    default: true
+  goodmc.menu.reload:
+    description: 重载服务器菜单配置
+    default: op

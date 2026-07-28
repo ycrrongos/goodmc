@@ -1,0 +1,14 @@
+buttons:
+  - slot: 21
+    material: SPYGLASS
+    name: "自由视角"
+    lore:
+      - "等同 /freecam"
+      - "F3+F4 同样可用"
+    command: "freecam"
+  - slot: 23
+    material: POTION
+    name: "无限夜视"
+    lore:
+      - "等同 /fullbright"
+    command: "fullbright"

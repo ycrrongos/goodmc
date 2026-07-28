@@ -1,0 +1,20 @@
+buttons:
+  - slot: 25
+    material: WHEAT_SEEDS
+    name: "查看种子"
+    lore:
+      - "等同 /seed"
+    command: "seed"
+  - slot: 31
+    material: IRON_SWORD
+    name: "自杀"
+    lore:
+      - "等同 /kill"
+      - "仅限击杀自己"
+    command: "kill"
+  - slot: 40
+    material: BOOK
+    name: "功能说明"
+    lore:
+      - "等同 /sc"
+    command: "sc"

@@ -1,0 +1,12 @@
+commands:
+  freecam: true
+  fullbright: true
+
+# 处于自由视角时禁止使用的指令（不含斜杠）
+blocked-commands:
+  - tpa
+  - tpahere
+  - back
+  - tpaccept
+  - tpaback
+  - kill

@@ -1,0 +1,30 @@
+name: Server-FakePlayer
+version: '${version}'
+main: com.serverfakeplayer.ServerFakePlayerPlugin
+api-version: '1.21'
+description: Carpet-style fake players for Paper 26.2
+author: ycrrongos
+softdepend: [AuthMe]
+
+commands:
+  player:
+    description: Carpet-style fake player control
+    usage: /player <name> <spawn|kill|attack|use|jump|sneak|sprint|look|move|stop> ...
+    aliases: [p]
+  fakeop:
+    description: Grant fake-player command access (like /op)
+    usage: /fakeop <player> | /fakeop list
+  fakedeop:
+    description: Revoke fake-player command access
+    usage: /fakedeop <player>
+
+permissions:
+  serverfakeplayer.use:
+    description: Use /player commands (also granted by /fakeop or OP)
+    default: false
+  serverfakeplayer.spawn:
+    description: Spawn fake players (also granted by /fakeop or OP)
+    default: false
+  serverfakeplayer.admin:
+    description: Use /fakeop and /fakedeop
+    default: op

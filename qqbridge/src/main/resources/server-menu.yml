@@ -1,0 +1,8 @@
+buttons:
+  - slot: 28
+    material: PAPER
+    name: "发送到QQ"
+    lore: ["等同 /qq"]
+    chat-input: true
+    command: "qq {input}"
+    prompt: "请输入要发送到 QQ 的消息，输入取消可放弃"

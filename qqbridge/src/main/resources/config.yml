@@ -1,0 +1,13 @@
+commands:
+  qq: true
+
+qq-bridge:
+  enabled: true
+  api-url: "http://127.0.0.1:8765"   # 同机用 127.0.0.1；跨机用 http://192.168.0.251:8765
+  api-key: "decb6c40bd4e70aff273a71bc25583ace73749972b11874b"
+  poll-interval-seconds: 3
+  poll-limit: 50
+  show-group: true
+  default-group: "RongMC&ROM交流群"
+  receive-group-contains: "RongMC&ROM交流群"
+  forward-join-quit: true
