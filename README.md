@@ -35,7 +35,7 @@ GoodMC - GoodMC 玩法增强
 
 本插件由 [RongMC](https://github.com/ycrrongos) 服务器开发并维护。
 
-RongMC 是一个 Minecraft 服务器，已部署 GoodMC 插件集中的全部插件。
+RongMC 是一个非常开放的Minecraft 群组服，没有任何领地、货币功能，有建筑服、生存、小游戏等多种玩法，已部署 GoodMC 插件集中的全部插件。
 
 欢迎加入我们的 QQ 交流群：
 
