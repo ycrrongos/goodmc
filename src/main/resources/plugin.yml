@@ -1,0 +1,26 @@
+name: GoodMC
+version: '${version}'
+main: com.goodmc.GoodMCPlugin
+api-version: '1.21'
+description: GoodMC 玩法增强
+author: ycrrongos
+softdepend: [AdminVote, Server-Vision]
+
+commands:
+  kill:
+    description: 自杀（普通玩家）或击杀实体（管理员）
+    usage: /kill [目标]
+  seed:
+    description: 查看世界种子
+    usage: /seed
+  sc:
+    description: 查看 GoodMC 功能说明
+    usage: /sc
+
+permissions:
+  goodmc.seed:
+    description: 查看世界种子
+    default: true
+  goodmc.sc:
+    description: 查看 GoodMC 功能说明
+    default: true

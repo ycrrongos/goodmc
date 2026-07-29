@@ -1,0 +1,13 @@
+join:
+  hint-message: "输入 /sc 查看服务器命令与 GoodMC 功能说明。"
+
+compatible-enchants:
+  enabled: true
+
+commands:
+  kill: true
+  seed: true
+  sc: true
+
+help:
+  extra-lines: []
