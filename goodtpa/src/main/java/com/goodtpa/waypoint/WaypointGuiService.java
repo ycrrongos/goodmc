@@ -1,9 +1,16 @@
 package com.goodtpa.waypoint;
 
+import com.goodtpa.util.DialogApiUtil;
+import io.papermc.paper.dialog.Dialog;
+import io.papermc.paper.registry.data.dialog.ActionButton;
+import io.papermc.paper.registry.data.dialog.body.DialogBody;
+import io.papermc.paper.registry.data.dialog.type.DialogType;
 import java.util.ArrayList;
 import java.util.List;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
@@ -44,6 +51,59 @@ public final class WaypointGuiService {
     }
 
     public void open(Player player, WaypointTab tab, int page) {
+        if (tab == WaypointTab.PUBLIC && page == 0 && DialogApiUtil.isAvailable()) {
+            openWaypointDialog(player);
+        } else {
+            openWaypointChestGui(player, tab, page);
+        }
+    }
+
+    private void openWaypointDialog(Player player) {
+        try {
+            Dialog dialog = Dialog.create(builder -> builder.empty()
+                    .base(io.papermc.paper.registry.data.dialog.DialogBase.builder(
+                                    Component.text("路径点菜单", NamedTextColor.DARK_AQUA))
+                            .canCloseWithEscape(true)
+                            .body(List.of(
+                                    DialogBody.plainMessage(Component.text("选择路径点操作", NamedTextColor.GRAY))
+                            ))
+                            .build()
+                    )
+                    .type(DialogType.multiAction(List.of(
+                            ActionButton.builder(Component.text("公开路径点", TextColor.color(0x55FF55)))
+                                    .tooltip(Component.text("查看公开路径点"))
+                                    .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                            ClickEvent.runCommand("/waypoint public")))
+                                    .build(),
+                            ActionButton.builder(Component.text("私有路径点", TextColor.color(0xFF55FF)))
+                                    .tooltip(Component.text("查看你的私有路径点"))
+                                    .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                            ClickEvent.runCommand("/waypoint private")))
+                                    .build(),
+                            ActionButton.builder(Component.text("创建路径点", TextColor.color(0xFFFF55)))
+                                    .tooltip(Component.text("创建新的路径点"))
+                                    .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                            ClickEvent.runCommand("/waypoint create")))
+                                    .build(),
+                            ActionButton.builder(Component.text("返回传送前位置", TextColor.color(0x55FFFF)))
+                                    .tooltip(Component.text("等同 /waypoint back"))
+                                    .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                            ClickEvent.runCommand("/waypoint back")))
+                                    .build()
+                    ), ActionButton.builder(Component.text("切换箱子 UI", TextColor.color(0x55FFFF)))
+                            .tooltip(Component.text("点击切换到箱子 GUI 界面"))
+                            .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                    ClickEvent.runCommand("/waypoint")))
+                            .build(), 2))
+            );
+            player.showDialog(dialog);
+        } catch (Exception e) {
+            player.sendMessage(Component.text("Dialog UI 不可用，使用箱子 GUI", NamedTextColor.YELLOW));
+            openWaypointChestGui(player, WaypointTab.PUBLIC, 0);
+        }
+    }
+
+    private void openWaypointChestGui(Player player, WaypointTab tab, int page) {
         WaypointPlayerState state = waypointManager.getOrCreateState(player.getUniqueId());
         state.setPage(tab, page);
 
@@ -187,6 +247,14 @@ public final class WaypointGuiService {
                 WaypointGuiHolder.TAB_PRIVATE,
                 createTabItem(Material.ENDER_EYE, "§d私有路径点", activeTab == WaypointTab.PRIVATE)
         );
+
+        // Switch to Dialog UI button (only on main tab)
+        if (activeTab == WaypointTab.PUBLIC) {
+            inventory.setItem(
+                    WaypointGuiHolder.SWITCH_UI_SLOT,
+                    createSwitchButtonItem()
+            );
+        }
     }
 
     private static void fillBackground(Inventory inventory) {
@@ -281,5 +349,17 @@ public final class WaypointGuiService {
 
     private static String formatMaterial(Material material) {
         return material.name();
+    }
+
+    private static ItemStack createSwitchButtonItem() {
+        ItemStack item = new ItemStack(Material.ENDER_PEARL);
+        ItemMeta meta = item.getItemMeta();
+        meta.displayName(LEGACY.deserialize("§b切换 Dialog UI").decoration(TextDecoration.ITALIC, false));
+        meta.lore(List.of(
+                LEGACY.deserialize("§7点击切换到 Dialog 对话框界面").decoration(TextDecoration.ITALIC, false)
+        ));
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        item.setItemMeta(meta);
+        return item;
     }
 }

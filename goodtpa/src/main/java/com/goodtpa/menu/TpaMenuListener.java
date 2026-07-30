@@ -61,6 +61,12 @@ public final class TpaMenuListener implements Listener {
         }
 
         int slot = event.getRawSlot();
+        if (slot == TpaMenuGuiHolder.SWITCH_UI_SLOT) {
+            // Switch to Dialog UI (will fall back to chest GUI if Dialog not available)
+            player.closeInventory();
+            guiService.openMain(player);
+            return;
+        }
         if (slot == TpaMenuGuiHolder.BACK_SLOT) {
             if (holder.screen() == TpaMenuScreen.MAIN) {
                 player.closeInventory();

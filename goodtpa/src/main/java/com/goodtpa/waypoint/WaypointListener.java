@@ -44,6 +44,12 @@ public final class WaypointListener implements Listener {
         }
 
         int slot = event.getRawSlot();
+        if (slot == WaypointGuiHolder.SWITCH_UI_SLOT) {
+            // Switch to Dialog UI (will fall back to chest GUI if Dialog not available)
+            player.closeInventory();
+            guiService.open(player, WaypointTab.PUBLIC, 0);
+            return;
+        }
         if (slot == WaypointGuiHolder.TAB_PUBLIC) {
             guiService.open(player, WaypointTab.PUBLIC);
             return;

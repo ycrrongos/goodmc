@@ -9,6 +9,7 @@ import org.bukkit.inventory.InventoryHolder;
 public final class MenuGuiHolder implements InventoryHolder {
 
     public static final int BACK_SLOT = 49;
+    public static final int SWITCH_UI_SLOT = 48;
 
     public enum Screen {
         MAIN,

@@ -9,6 +9,7 @@ import org.bukkit.inventory.InventoryHolder;
 public final class TpaMenuGuiHolder implements InventoryHolder {
 
     public static final int BACK_SLOT = 49;
+    public static final int SWITCH_UI_SLOT = 48;
 
     private final TpaMenuScreen screen;
     private final int page;

@@ -27,6 +27,7 @@ public final class WaypointGuiHolder implements InventoryHolder {
     public static final int BACK_BUTTON = 49;
     public static final int PAGE_PREVIOUS = 45;
     public static final int PAGE_NEXT = 53;
+    public static final int SWITCH_UI_SLOT = 48;
 
     public static final int PAGE_SIZE = WAYPOINT_SLOTS.length;
 

@@ -62,6 +62,12 @@ public final class MenuListener implements Listener {
         }
 
         int slot = event.getRawSlot();
+        if (slot == MenuGuiHolder.SWITCH_UI_SLOT) {
+            // Switch to Dialog UI (will fall back to chest GUI if Dialog not available)
+            player.closeInventory();
+            guiService.openMain(player);
+            return;
+        }
         if (slot == MenuGuiHolder.BACK_SLOT) {
             if (holder.screen() == MenuGuiHolder.Screen.MAIN) {
                 player.closeInventory();

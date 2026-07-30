@@ -1,52 +1,52 @@
 {
   "stats": {
+    "minecraft:picked_up": {
+      "minecraft:cherry_boat": 4,
+      "minecraft:tnt": 29
+    },
+    "minecraft:dropped": {
+      "minecraft:cherry_boat": 1,
+      "minecraft:tnt": 106
+    },
     "minecraft:custom": {
-      "minecraft:time_since_rest": 28277,
-      "minecraft:walk_one_cm": 40830,
-      "minecraft:leave_game": 9,
+      "minecraft:time_since_rest": 42356,
+      "minecraft:walk_one_cm": 42249,
+      "minecraft:leave_game": 10,
       "minecraft:mob_kills": 3,
       "minecraft:walk_under_water_one_cm": 5087,
       "minecraft:damage_taken": 492,
       "minecraft:boat_one_cm": 201515,
-      "minecraft:play_time": 55730,
-      "minecraft:jump": 123,
-      "minecraft:time_since_death": 28256,
+      "minecraft:play_time": 69809,
+      "minecraft:jump": 125,
+      "minecraft:time_since_death": 42335,
       "minecraft:drop": 107,
       "minecraft:sprint_one_cm": 771,
       "minecraft:fall_one_cm": 1425,
-      "minecraft:total_world_time": 55730,
-      "minecraft:fly_one_cm": 153450,
+      "minecraft:total_world_time": 69809,
+      "minecraft:fly_one_cm": 161376,
       "minecraft:walk_on_water_one_cm": 3611,
       "minecraft:crouch_one_cm": 1062,
       "minecraft:sneak_time": 259,
       "minecraft:deaths": 2,
       "minecraft:player_kills": 1
     },
-    "minecraft:killed": {
-      "minecraft:salmon": 1,
-      "minecraft:cow": 1,
-      "minecraft:squid": 1
-    },
     "minecraft:used": {
       "minecraft:lava_bucket": 104,
-      "minecraft:sticky_piston": 54,
-      "minecraft:lever": 7,
+      "minecraft:sticky_piston": 55,
+      "minecraft:lever": 10,
       "minecraft:observer": 5,
       "minecraft:birch_boat": 4,
       "minecraft:cherry_boat": 60,
       "minecraft:redstone": 35,
       "minecraft:oak_planks": 40,
-      "minecraft:end_rod": 49,
+      "minecraft:end_rod": 50,
       "minecraft:ice": 5,
       "minecraft:tnt": 3
     },
-    "minecraft:dropped": {
-      "minecraft:cherry_boat": 1,
-      "minecraft:tnt": 106
-    },
-    "minecraft:picked_up": {
-      "minecraft:cherry_boat": 4,
-      "minecraft:tnt": 29
+    "minecraft:killed": {
+      "minecraft:salmon": 1,
+      "minecraft:cow": 1,
+      "minecraft:squid": 1
     }
   },
   "DataVersion": 4903

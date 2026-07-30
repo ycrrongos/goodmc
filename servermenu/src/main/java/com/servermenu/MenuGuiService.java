@@ -1,9 +1,16 @@
 package com.servermenu;
 
+import com.servermenu.util.DialogApiUtil;
+import io.papermc.paper.dialog.Dialog;
+import io.papermc.paper.registry.data.dialog.ActionButton;
+import io.papermc.paper.registry.data.dialog.body.DialogBody;
+import io.papermc.paper.registry.data.dialog.type.DialogType;
 import java.util.ArrayList;
 import java.util.List;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -26,6 +33,55 @@ public final class MenuGuiService {
     }
 
     public void openMain(Player player) {
+        if (DialogApiUtil.isAvailable()) {
+            openMainDialog(player);
+        } else {
+            openMainChestGui(player);
+        }
+    }
+
+    private void openMainDialog(Player player) {
+        try {
+            // Build action buttons from registry
+            List<ActionButton> actionButtons = new ArrayList<>();
+            for (MenuButton button : registry.buttons()) {
+                actionButtons.add(
+                        ActionButton.builder(Component.text(button.name(), TextColor.color(0x55FFFF)))
+                                .tooltip(Component.text(String.join("\n", button.lore())))
+                                .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                        ClickEvent.runCommand(button.command())))
+                                .build()
+                );
+            }
+
+            // Add switch to chest UI button
+            actionButtons.add(
+                    ActionButton.builder(Component.text("切换箱子 UI", TextColor.color(0x55FFFF)))
+                            .tooltip(Component.text("点击切换到箱子 GUI 界面"))
+                            .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                    ClickEvent.runCommand("/servermenu")))
+                            .build()
+            );
+
+            Dialog dialog = Dialog.create(builder -> builder.empty()
+                    .base(io.papermc.paper.registry.data.dialog.DialogBase.builder(
+                                    Component.text("服务器菜单", NamedTextColor.DARK_AQUA))
+                            .canCloseWithEscape(true)
+                            .body(List.of(
+                                    DialogBody.plainMessage(Component.text("选择服务器操作", NamedTextColor.GRAY))
+                            ))
+                            .build()
+                    )
+                    .type(DialogType.multiAction(actionButtons, null, 3))
+            );
+            player.showDialog(dialog);
+        } catch (Exception e) {
+            player.sendMessage(Component.text("Dialog UI 不可用，使用箱子 GUI", NamedTextColor.YELLOW));
+            openMainChestGui(player);
+        }
+    }
+
+    private void openMainChestGui(Player player) {
         MenuGuiHolder holder = new MenuGuiHolder(MenuGuiHolder.Screen.MAIN);
         Inventory inventory = Bukkit.createInventory(holder, 54, Component.text("服务器菜单", NamedTextColor.DARK_AQUA));
         holder.setInventory(inventory);
@@ -34,6 +90,9 @@ public final class MenuGuiService {
         for (MenuButton button : registry.buttons()) {
             inventory.setItem(button.slot(), createActionItem(button));
         }
+
+        // Switch to Dialog UI button
+        inventory.setItem(MenuGuiHolder.SWITCH_UI_SLOT, createSwitchButtonItem());
 
         inventory.setItem(MenuGuiHolder.BACK_SLOT, createItem(
                 Material.BARRIER,
@@ -137,6 +196,20 @@ public final class MenuGuiService {
         if (lore != null && !lore.isEmpty()) {
             meta.lore(lore.stream().map(line -> line.decoration(TextDecoration.ITALIC, false)).toList());
         }
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    private static ItemStack createSwitchButtonItem() {
+        ItemStack item = new ItemStack(Material.ENDER_PEARL);
+        ItemMeta meta = item.getItemMeta();
+        meta.displayName(Component.text("切换 Dialog UI", NamedTextColor.AQUA).decoration(TextDecoration.BOLD, true)
+                .decoration(TextDecoration.ITALIC, false));
+        meta.lore(List.of(
+                Component.text("点击切换到 Dialog 对话框界面", NamedTextColor.GRAY)
+                        .decoration(TextDecoration.ITALIC, false)
+        ));
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(meta);
         return item;

@@ -1,11 +1,18 @@
 package com.goodtpa.menu;
 
 import com.goodtpa.tpa.TpaManager;
+import com.goodtpa.util.DialogApiUtil;
+import io.papermc.paper.dialog.Dialog;
+import io.papermc.paper.registry.data.dialog.ActionButton;
+import io.papermc.paper.registry.data.dialog.body.DialogBody;
+import io.papermc.paper.registry.data.dialog.type.DialogType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -28,6 +35,69 @@ public final class TpaMenuGuiService {
     }
 
     public void openMain(Player player) {
+        if (DialogApiUtil.isAvailable()) {
+            openMainDialog(player);
+        } else {
+            openMainChestGui(player);
+        }
+    }
+
+    private void openMainDialog(Player player) {
+        try {
+            Dialog dialog = Dialog.create(builder -> builder.empty()
+                    .base(io.papermc.paper.registry.data.dialog.DialogBase.builder(
+                                    Component.text("传送菜单", NamedTextColor.DARK_AQUA))
+                            .canCloseWithEscape(true)
+                            .body(List.of(
+                                    DialogBody.plainMessage(Component.text("选择传送操作", NamedTextColor.GRAY))
+                            ))
+                            .build()
+                    )
+                    .type(DialogType.multiAction(List.of(
+                            ActionButton.builder(Component.text("传送到玩家", TextColor.color(0x55FF55)))
+                                    .tooltip(Component.text("等同 /tpa"))
+                                    .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                            ClickEvent.runCommand("/tpa_menu tpa")))
+                                    .build(),
+                            ActionButton.builder(Component.text("召唤玩家", TextColor.color(0x55FF55)))
+                                    .tooltip(Component.text("等同 /tpahere"))
+                                    .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                            ClickEvent.runCommand("/tpa_menu tpahere")))
+                                    .build(),
+                            ActionButton.builder(Component.text("接受传送", TextColor.color(0x55FF55)))
+                                    .tooltip(Component.text("等同 /tpaccept"))
+                                    .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                            ClickEvent.runCommand("/tpa_menu tpaccept")))
+                                    .build(),
+                            ActionButton.builder(Component.text("拒绝传送", TextColor.color(0xFF5555)))
+                                    .tooltip(Component.text("等同 /tpadeny"))
+                                    .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                            ClickEvent.runCommand("/tpa_menu tpdeny")))
+                                    .build(),
+                            ActionButton.builder(Component.text("返回传送点", TextColor.color(0xFFFF55)))
+                                    .tooltip(Component.text("等同 /tpaback"))
+                                    .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                            ClickEvent.runCommand("/tpaback")))
+                                    .build(),
+                            ActionButton.builder(Component.text("返回死亡点", TextColor.color(0xFFFF55)))
+                                    .tooltip(Component.text("等同 /back"))
+                                    .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                            ClickEvent.runCommand("/back")))
+                                    .build()
+                    ), ActionButton.builder(Component.text("切换箱子 UI", TextColor.color(0x55FFFF)))
+                            .tooltip(Component.text("点击切换到箱子 GUI 界面"))
+                            .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
+                                    ClickEvent.runCommand("/tpa_menu")))
+                            .build(), 3))
+            );
+            player.showDialog(dialog);
+        } catch (Exception e) {
+            player.sendMessage(Component.text("Dialog UI 不可用，使用箱子 GUI", NamedTextColor.YELLOW));
+            openMainChestGui(player);
+        }
+    }
+
+    private void openMainChestGui(Player player) {
         TpaMenuGuiHolder holder = new TpaMenuGuiHolder(TpaMenuScreen.MAIN);
         Inventory inventory = Bukkit.createInventory(holder, 54, Component.text("传送菜单", NamedTextColor.DARK_AQUA));
         holder.setInventory(inventory);
@@ -40,6 +110,9 @@ public final class TpaMenuGuiService {
         setAction(inventory, 14, Material.CLOCK, NamedTextColor.YELLOW, "传送失效时间", "等同 /tpatimeout", "点击后在聊天栏输入秒数");
         setAction(inventory, 19, Material.COMPASS, NamedTextColor.YELLOW, "返回传送点", "等同 /tpaback");
         setAction(inventory, 20, Material.RECOVERY_COMPASS, NamedTextColor.YELLOW, "返回死亡点", "等同 /back");
+
+        // Switch to Dialog UI button
+        inventory.setItem(TpaMenuGuiHolder.SWITCH_UI_SLOT, createSwitchButtonItem());
 
         inventory.setItem(TpaMenuGuiHolder.BACK_SLOT, createItem(
                 Material.BARRIER,
@@ -184,6 +257,20 @@ public final class TpaMenuGuiService {
         if (lore != null && !lore.isEmpty()) {
             meta.lore(lore.stream().map(line -> line.decoration(TextDecoration.ITALIC, false)).toList());
         }
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    private static ItemStack createSwitchButtonItem() {
+        ItemStack item = new ItemStack(Material.ENDER_PEARL);
+        ItemMeta meta = item.getItemMeta();
+        meta.displayName(Component.text("切换 Dialog UI", NamedTextColor.AQUA).decoration(TextDecoration.BOLD, true)
+                .decoration(TextDecoration.ITALIC, false));
+        meta.lore(List.of(
+                Component.text("点击切换到 Dialog 对话框界面", NamedTextColor.GRAY)
+                        .decoration(TextDecoration.ITALIC, false)
+        ));
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(meta);
         return item;
