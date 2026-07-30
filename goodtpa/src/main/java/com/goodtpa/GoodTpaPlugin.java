@@ -1,5 +1,6 @@
 package com.goodtpa;
 
+import com.goodtpa.command.TpaMenuOpenCommand;
 import com.goodtpa.deathback.DeathBackCommand;
 import com.goodtpa.deathback.DeathBackManager;
 import com.goodtpa.deathback.DeathListener;
@@ -75,6 +76,7 @@ public final class GoodTpaPlugin extends JavaPlugin {
             }
             return true;
         }, null);
+        registerIfEnabled("tpa_menu_open", new TpaMenuOpenCommand(tpaMenuGuiService), null);
         registerIfEnabled("back", new DeathBackCommand(deathBackManager), null);
 
         WaypointCommand waypointCommand = new WaypointCommand(waypointGuiService, waypointManager);

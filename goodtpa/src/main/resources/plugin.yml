@@ -27,6 +27,9 @@ commands:
   tpamenu:
     description: 打开传送菜单
     usage: /tpamenu
+  tpa_menu_open:
+    description: 打开传送菜单玩家选择器（Dialog UI 用）
+    usage: /tpa_menu_open <tpa|tpahere|tpaccept|tpdeny>
   back:
     description: 返回上次死亡点
     usage: /back
