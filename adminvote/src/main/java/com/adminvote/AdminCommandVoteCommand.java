@@ -31,13 +31,13 @@ public final class AdminCommandVoteCommand implements CommandExecutor, TabComple
             @NotNull String[] args
     ) {
         if (args.length != 2) {
-            sender.sendMessage(Component.text("用法: /adminvote <yes|no> <管理员>", NamedTextColor.RED));
+            sender.sendMessage(Component.text("用法: /adminvote <yes|no|abstain> <管理员>", NamedTextColor.RED));
             return true;
         }
 
-        Boolean accepted = parseVote(args[0]);
-        if (accepted == null) {
-            sender.sendMessage(Component.text("请选择 yes（同意）或 no（拒绝）。", NamedTextColor.RED));
+        VoteRecord.VoteChoice choice = parseChoice(args[0]);
+        if (choice == null) {
+            sender.sendMessage(Component.text("请选择 yes（同意）、no（拒绝）或 abstain（弃权）。", NamedTextColor.RED));
             return true;
         }
 
@@ -49,41 +49,58 @@ public final class AdminCommandVoteCommand implements CommandExecutor, TabComple
 
         AdminCommandVoteManager.VoteResult result;
         if (sender instanceof ConsoleCommandSender) {
-            result = voteManager.recordConsoleVote(sender, admin.getUniqueId(), accepted);
+            // console can only do "yes" to approve
+            if (choice != VoteRecord.VoteChoice.ACCEPT) {
+                sender.sendMessage(Component.text("控制台只能执行同意投票。", NamedTextColor.RED));
+                return true;
+            }
+            result = voteManager.recordConsoleVote(sender, admin.getUniqueId());
         } else if (sender instanceof Player voter) {
-            result = voteManager.recordVote(voter, admin.getUniqueId(), accepted);
+            result = voteManager.recordVote(voter, admin.getUniqueId(), choice);
         } else {
             sender.sendMessage(Component.text("请由玩家或控制台执行该指令。", NamedTextColor.RED));
             return true;
         }
 
-        sendResultMessage(sender, result, accepted);
+        sendResultMessage(sender, result, choice);
         return true;
     }
 
-    private void sendResultMessage(CommandSender sender, AdminCommandVoteManager.VoteResult result, boolean accepted) {
+    private void sendResultMessage(CommandSender sender, AdminCommandVoteManager.VoteResult result, VoteRecord.VoteChoice choice) {
         switch (result) {
-            case RECORDED -> sender.sendMessage(
-                    Component.text("已记录你的投票：", NamedTextColor.GREEN)
-                            .append(Component.text(accepted ? "同意" : "拒绝", accepted ? NamedTextColor.GREEN : NamedTextColor.RED))
-            );
+            case RECORDED -> {
+                String label = switch (choice) {
+                    case ACCEPT -> "同意";
+                    case REJECT -> "拒绝";
+                    case ABSTAIN -> "弃权";
+                };
+                NamedTextColor color = switch (choice) {
+                    case ACCEPT -> NamedTextColor.GREEN;
+                    case REJECT -> NamedTextColor.RED;
+                    case ABSTAIN -> NamedTextColor.GRAY;
+                };
+                sender.sendMessage(
+                        Component.text("已记录你的投票：", NamedTextColor.GREEN)
+                                .append(Component.text(label, color))
+                );
+            }
             case PASSED -> sender.sendMessage(Component.text("指令投票已通过。", NamedTextColor.GREEN));
             case FAILED -> sender.sendMessage(Component.text("指令投票未通过。", NamedTextColor.YELLOW));
             case NOT_FOUND -> sender.sendMessage(Component.text("该管理员当前没有进行中的指令投票。", NamedTextColor.RED));
             case ALREADY_VOTED -> sender.sendMessage(Component.text("你已经投过票了。", NamedTextColor.RED));
             case SELF_VOTE -> sender.sendMessage(Component.text("不能给自己发起的投票投票。", NamedTextColor.RED));
             case CONSOLE_ONLY -> sender.sendMessage(Component.text("该投票只能由控制台处理。", NamedTextColor.RED));
-            case CONSOLE_YES_ONLY -> sender.sendMessage(Component.text("控制台只能执行同意投票。", NamedTextColor.RED));
             case CONSOLE_NO_PLAYERS_ONLY -> sender.sendMessage(
                     Component.text("控制台仅能在没有其他玩家在线时批准投票。", NamedTextColor.RED)
             );
         }
     }
 
-    private static Boolean parseVote(String input) {
+    private static VoteRecord.VoteChoice parseChoice(String input) {
         return switch (input.toLowerCase(Locale.ROOT)) {
-            case "yes", "y", "同意", "accept" -> true;
-            case "no", "n", "拒绝", "deny" -> false;
+            case "yes", "y", "同意", "accept" -> VoteRecord.VoteChoice.ACCEPT;
+            case "no", "n", "拒绝", "deny" -> VoteRecord.VoteChoice.REJECT;
+            case "abstain", "a", "弃权" -> VoteRecord.VoteChoice.ABSTAIN;
             default -> null;
         };
     }
@@ -98,10 +115,8 @@ public final class AdminCommandVoteCommand implements CommandExecutor, TabComple
         if (args.length == 1) {
             String prefix = args[0].toLowerCase(Locale.ROOT);
             List<String> options = new ArrayList<>();
-            for (String option : List.of("yes", "no")) {
-                if (option.startsWith(prefix)) {
-                    options.add(option);
-                }
+            for (String option : List.of("yes", "no", "abstain")) {
+                if (option.startsWith(prefix)) options.add(option);
             }
             return options;
         }

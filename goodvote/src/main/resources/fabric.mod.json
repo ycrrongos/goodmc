@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "goodvote",
+  "version": "${version}",
+  "name": "GoodVote",
+  "description": "A Fabric voting mod for server administration commands with GUI support",
+  "authors": ["ycrrongos"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/goodvote/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.goodvote.GoodVoteMod"],
+    "client": ["com.goodvote.client.GoodVoteClient"],
+    "server": ["com.goodvote.server.GoodVoteServer"]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

@@ -2,16 +2,25 @@ name: AdminVote
 version: '${version}'
 main: com.adminvote.AdminVotePlugin
 api-version: '1.21'
-description: 管理员指令投票与静默传送
+description: 管理员指令投票、玩家请求投票与静默传送
 author: 爱玩电脑的小融融 (ycrrongos)
 
 commands:
   adminvote:
-    description: 回应管理员指令投票
-    usage: /adminvote <yes|no> <管理员>
+    description: 回应管理员指令投票（同意/拒绝/弃权）
+    usage: /adminvote <yes|no|abstain> <管理员>
   tph:
     description: 静默传送玩家（仅管理员）
     usage: /tph <玩家> [目标玩家]
+  votecmd:
+    description: 玩家请求执行管理指令，发起投票
+    usage: /votecmd <指令>
+  vote:
+    description: 投票管理（查看状态/重载配置）
+    usage: /vote <status|reload>
+  vote_switch_gui:
+    description: 切换投票界面到箱子GUI
+    usage: /vote_switch_gui
 
 permissions:
   goodmc.bypass:

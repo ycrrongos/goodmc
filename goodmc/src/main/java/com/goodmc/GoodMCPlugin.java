@@ -1,8 +1,12 @@
 package com.goodmc;
 
+import com.goodmc.command.FireballUnlockCommand;
 import com.goodmc.command.KillCommand;
 import com.goodmc.command.ScCommand;
 import com.goodmc.command.SeedCommand;
+import com.goodmc.command.TntGuiCommand;
+import com.goodmc.command.TntTrajCommand;
+import com.goodmc.command.TntUnlockCommand;
 import com.goodmc.enchant.CompatibleEnchantsListener;
 import com.goodmc.listener.CreeperExplosionListener;
 import com.goodmc.listener.FireChargeListener;
@@ -13,6 +17,7 @@ import com.goodmc.listener.PistonEndRodListener;
 import com.goodmc.listener.SnowGolemProjectileImmunityListener;
 import com.goodmc.listener.SnowballListener;
 import com.goodmc.listener.TntThrowListener;
+import com.goodmc.listener.TntTrajectoryGui;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,8 +35,18 @@ public final class GoodMCPlugin extends JavaPlugin {
         var pm = getServer().getPluginManager();
         pm.registerEvents(new SnowballListener(), this);
         pm.registerEvents(new SnowGolemProjectileImmunityListener(), this);
-        pm.registerEvents(new FireChargeListener(), this);
-        pm.registerEvents(new TntThrowListener(), this);
+        TntThrowListener tntListener = new TntThrowListener(this);
+        pm.registerEvents(tntListener, this);
+        TntTrajectoryGui trajectoryGui = new TntTrajectoryGui(this, tntListener);
+        pm.registerEvents(trajectoryGui, this);
+        tntListener.setTrajectoryGui(trajectoryGui);
+        registerCommand("tnt_unlock", new TntUnlockCommand(tntListener));
+        registerCommand("tnt_traj", new TntTrajCommand(tntListener));
+        registerCommand("tnt_gui", new TntGuiCommand(tntListener));
+        
+        FireChargeListener fireChargeListener = new FireChargeListener();
+        pm.registerEvents(fireChargeListener, this);
+        registerCommand("fireball_unlock", new FireballUnlockCommand(fireChargeListener));
         pm.registerEvents(new CreeperExplosionListener(), this);
         pm.registerEvents(new GrindstoneExtractorListener(), this);
         pm.registerEvents(new GrindstoneCurseListener(), this);

@@ -3,11 +3,15 @@ package com.goodmc.listener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Directional;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
 import org.bukkit.event.EventHandler;
@@ -21,6 +25,16 @@ public final class PistonEndRodListener implements Listener {
 
     private static final int TRIGGER_COUNT = 10;
     private static final int TNT_FUSE_TICKS = 80;
+    private static final double WARNING_RADIUS = 20.0;
+
+    private static final Map<Integer, String> WARNING_MESSAGES = Map.ofEntries(
+            Map.entry(3,  "⚠ 警告一次"),
+            Map.entry(6,  "⚠⚠ 警告第二次"),
+            Map.entry(7,  "再玩末地烛消息被家爆！"),
+            Map.entry(8,  "如果在家里玩消息把家炸没！"),
+            Map.entry(9,  "炸了腐竹不管哦"),
+            Map.entry(10, "我炸死你们！！")
+    );
 
     private final Map<String, Integer> moveCounts = new HashMap<>();
 
@@ -68,13 +82,35 @@ public final class PistonEndRodListener implements Listener {
 
         String key = blockKey(pistonBlock);
         int count = moveCounts.getOrDefault(key, 0) + 1;
+        moveCounts.put(key, count);
+
+        // 达到警告阈值时向附近玩家发送屏幕警告
+        String warning = WARNING_MESSAGES.get(count);
+        if (warning != null) {
+            sendWarning(endRodBlock.getLocation().add(0.5, 0.5, 0.5), warning);
+        }
+
         if (count < TRIGGER_COUNT) {
-            moveCounts.put(key, count);
             return;
         }
 
         moveCounts.remove(key);
         punish(endRodBlock.getLocation().add(0.5, 0.5, 0.5));
+    }
+
+    private static void sendWarning(Location center, String message) {
+        var world = center.getWorld();
+        if (world == null) return;
+
+        Component component = Component.text(message)
+                .color(NamedTextColor.RED)
+                .decoration(TextDecoration.BOLD, true);
+
+        for (Player player : world.getPlayers()) {
+            if (player.getLocation().distanceSquared(center) <= WARNING_RADIUS * WARNING_RADIUS) {
+                player.sendActionBar(component);
+            }
+        }
     }
 
     private static void punish(Location center) {

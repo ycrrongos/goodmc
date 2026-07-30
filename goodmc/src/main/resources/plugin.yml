@@ -16,6 +16,18 @@ commands:
   sc:
     description: 查看 GoodMC 功能说明
     usage: /sc
+  tnt_unlock:
+    description: 解锁TNT丢出保护锁
+    usage: /tnt_unlock
+  tnt_traj:
+    description: 切换TNT丢出抛物线
+    usage: /tnt_traj <轨迹类型>
+  tnt_gui:
+    description: 打开TNT抛物线选择界面
+    usage: /tnt_gui
+  fireball_unlock:
+    description: 解锁火球丢出保护锁
+    usage: /fireball_unlock
 
 permissions:
   goodmc.seed:

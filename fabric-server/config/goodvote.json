@@ -1,0 +1,14 @@
+{
+  "adminCommandFilterMode": "BLACKLIST",
+  "adminCommandList": [],
+  "adminCommandRequiresVote": true,
+  "playerRequestFilterMode": "WHITELIST",
+  "playerRequestCommandList": [],
+  "playerRequestEnabled": true,
+  "configChangeRequiresVote": true,
+  "voteTimeoutSeconds": 60,
+  "approvalPercent": 80,
+  "afkDefaultAccept": true,
+  "afkThresholdSeconds": 30,
+  "allowTargetSelectors": false
+}

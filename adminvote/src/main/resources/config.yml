@@ -1,13 +1,46 @@
 commands:
   adminvote: true
   tph: true
+  votecmd: true
+  vote: true
 
-admin-vote:
-  # 普通原版管理员指令的同意比例（百分比，1-100）
-  # 例如 51 表示需要超过半数玩家同意；100 表示全体同意
+# 管理员指令过滤
+admin-command-filter:
+  # true = 使用下方硬编码的原版指令列表（默认行为）
+  # false = 使用自定义 mode + list
+  use-hardcoded-list: true
+  # WHITELIST: 只有 list 中的指令需要投票
+  # BLACKLIST: 除 list 外的所有指令需要投票
+  mode: BLACKLIST
+  list: []
+
+# 玩家请求执行管理指令 (/votecmd)
+player-request:
+  enabled: true
+  # WHITELIST: 只有 list 中的指令可以被请求
+  # BLACKLIST: 除 list 外的指令都可以被请求
+  filter-mode: WHITELIST
+  command-list:
+    - gamemode
+    - time
+    - weather
+    - tp
+    - teleport
+    - give
+
+# 投票设置
+vote-settings:
+  # 普通指令同意比例（百分比，1-100）
   approval-percent: 80
-  # gamerule 指令在多名玩家在线时的同意比例（百分比）
-  # 设为 100 即全体同意；设为 51 则与上面相同规则
+  # gamerule 指令在多名玩家在线时的同意比例
   gamerule-approval-percent: 100
-  # 至少多少名玩家在线时，gamerule 使用上面的 gamerule-approval-percent
+  # 至少多少名玩家在线时 gamerule 使用上面的特殊比例
   gamerule-special-min-online: 2
+  # 投票超时时间（秒）
+  timeout-seconds: 60
+  # AFK 玩家超时后自动投同意
+  afk-default-accept: true
+  # AFK 判定阈值（秒）：多少秒无活动视为 AFK
+  afk-threshold-seconds: 30
+  # 是否允许含 @a @e @r 目标选择器的指令进入投票
+  allow-target-selectors: false
