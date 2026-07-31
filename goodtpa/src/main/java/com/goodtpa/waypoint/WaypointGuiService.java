@@ -40,6 +40,7 @@ public final class WaypointGuiService {
     };
 
     private final WaypointManager waypointManager;
+    private final java.util.Map<java.util.UUID, Boolean> playerUiPreference = new java.util.HashMap<>(); // true = Dialog, false = Chest
 
     public WaypointGuiService(WaypointManager waypointManager) {
         this.waypointManager = waypointManager;
@@ -51,18 +52,32 @@ public final class WaypointGuiService {
     }
 
     public void open(Player player, WaypointTab tab, int page) {
-        if (tab == WaypointTab.PUBLIC && page == 0 && DialogApiUtil.isAvailable()) {
-            openWaypointDialog(player);
+        // 检查玩家偏好，默认使用 Dialog UI（仅在主界面）
+        if (tab == WaypointTab.PUBLIC && page == 0) {
+            Boolean preferDialog = playerUiPreference.get(player.getUniqueId());
+            if (preferDialog == null || preferDialog) {
+                openWaypointDialog(player);
+            } else {
+                openWaypointChestGui(player, tab, page);
+            }
         } else {
             openWaypointChestGui(player, tab, page);
         }
     }
 
     public void openWaypointChest(Player player, WaypointTab tab, int page) {
+        // 保存玩家偏好为箱子 GUI
+        playerUiPreference.put(player.getUniqueId(), false);
         openWaypointChestGui(player, tab, page);
     }
 
-    private void openWaypointDialog(Player player) {
+    public void openWaypointDialog(Player player) {
+        // 保存玩家偏好为 Dialog UI
+        playerUiPreference.put(player.getUniqueId(), true);
+        openWaypointDialogInternal(player);
+    }
+
+    private void openWaypointDialogInternal(Player player) {
         try {
             Dialog dialog = Dialog.create(builder -> builder.empty()
                     .base(io.papermc.paper.registry.data.dialog.DialogBase.builder(

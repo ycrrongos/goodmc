@@ -27,20 +27,35 @@ public final class MenuGuiService {
     private static final int PLAYER_PAGE_SIZE = 45;
 
     private final MenuButtonRegistry registry;
+    private final java.util.Map<java.util.UUID, Boolean> playerUiPreference = new java.util.HashMap<>(); // true = Dialog, false = Chest
 
     public MenuGuiService(MenuButtonRegistry registry) {
         this.registry = registry;
     }
 
     public void openMain(Player player) {
-        openMainDialog(player);
+        // 检查玩家偏好，默认使用 Dialog UI
+        Boolean preferDialog = playerUiPreference.get(player.getUniqueId());
+        if (preferDialog == null || preferDialog) {
+            openMainDialog(player);
+        } else {
+            openMainChestGui(player);
+        }
     }
 
     public void openMainChest(Player player) {
+        // 保存玩家偏好为箱子 GUI
+        playerUiPreference.put(player.getUniqueId(), false);
         openMainChestGui(player);
     }
 
-    private void openMainDialog(Player player) {
+    public void openMainDialog(Player player) {
+        // 保存玩家偏好为 Dialog UI
+        playerUiPreference.put(player.getUniqueId(), true);
+        openMainDialogInternal(player);
+    }
+
+    private void openMainDialogInternal(Player player) {
         try {
             // Build action buttons from registry
             List<ActionButton> actionButtons = new ArrayList<>();

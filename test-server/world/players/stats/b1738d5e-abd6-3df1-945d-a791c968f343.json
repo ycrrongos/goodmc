@@ -1,39 +1,8 @@
 {
   "stats": {
-    "minecraft:killed": {
-      "minecraft:salmon": 1,
-      "minecraft:cow": 1,
-      "minecraft:squid": 1
-    },
     "minecraft:picked_up": {
       "minecraft:cherry_boat": 4,
       "minecraft:tnt": 29
-    },
-    "minecraft:custom": {
-      "minecraft:time_since_rest": 115896,
-      "minecraft:walk_one_cm": 43058,
-      "minecraft:leave_game": 15,
-      "minecraft:mob_kills": 3,
-      "minecraft:walk_under_water_one_cm": 5087,
-      "minecraft:damage_taken": 492,
-      "minecraft:boat_one_cm": 201515,
-      "minecraft:play_time": 143349,
-      "minecraft:jump": 127,
-      "minecraft:time_since_death": 115875,
-      "minecraft:drop": 107,
-      "minecraft:sprint_one_cm": 771,
-      "minecraft:fall_one_cm": 1425,
-      "minecraft:total_world_time": 143349,
-      "minecraft:fly_one_cm": 169274,
-      "minecraft:walk_on_water_one_cm": 3611,
-      "minecraft:crouch_one_cm": 1062,
-      "minecraft:sneak_time": 259,
-      "minecraft:deaths": 2,
-      "minecraft:player_kills": 1
-    },
-    "minecraft:dropped": {
-      "minecraft:cherry_boat": 1,
-      "minecraft:tnt": 106
     },
     "minecraft:used": {
       "minecraft:lava_bucket": 104,
@@ -47,6 +16,37 @@
       "minecraft:end_rod": 51,
       "minecraft:ice": 5,
       "minecraft:tnt": 3
+    },
+    "minecraft:dropped": {
+      "minecraft:cherry_boat": 1,
+      "minecraft:tnt": 106
+    },
+    "minecraft:killed": {
+      "minecraft:salmon": 1,
+      "minecraft:cow": 1,
+      "minecraft:squid": 1
+    },
+    "minecraft:custom": {
+      "minecraft:time_since_rest": 120284,
+      "minecraft:walk_one_cm": 43058,
+      "minecraft:leave_game": 16,
+      "minecraft:mob_kills": 3,
+      "minecraft:walk_under_water_one_cm": 5087,
+      "minecraft:damage_taken": 492,
+      "minecraft:boat_one_cm": 201515,
+      "minecraft:play_time": 147737,
+      "minecraft:jump": 127,
+      "minecraft:time_since_death": 120263,
+      "minecraft:drop": 107,
+      "minecraft:sprint_one_cm": 771,
+      "minecraft:fall_one_cm": 1425,
+      "minecraft:total_world_time": 147737,
+      "minecraft:fly_one_cm": 169274,
+      "minecraft:walk_on_water_one_cm": 3611,
+      "minecraft:crouch_one_cm": 1062,
+      "minecraft:sneak_time": 259,
+      "minecraft:deaths": 2,
+      "minecraft:player_kills": 1
     }
   },
   "DataVersion": 4903
