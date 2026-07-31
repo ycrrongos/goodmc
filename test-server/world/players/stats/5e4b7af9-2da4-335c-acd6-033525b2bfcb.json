@@ -1,10 +1,5 @@
 {
   "stats": {
-    "minecraft:mined": {
-      "minecraft:spruce_planks": 1,
-      "minecraft:spruce_stairs": 1,
-      "minecraft:oak_planks": 1
-    },
     "minecraft:picked_up": {
       "minecraft:spruce_planks": 1,
       "minecraft:oak_planks": 2,
@@ -12,41 +7,48 @@
       "minecraft:arrow": 2,
       "minecraft:spruce_stairs": 1
     },
-    "minecraft:used": {
-      "minecraft:cherry_boat": 1,
+    "minecraft:custom": {
+      "minecraft:time_since_rest": 2268,
+      "minecraft:walk_one_cm": 18115,
+      "minecraft:leave_game": 17,
+      "minecraft:mob_kills": 2,
+      "minecraft:walk_under_water_one_cm": 300,
+      "minecraft:damage_taken": 2655,
+      "minecraft:damage_dealt": 251,
+      "minecraft:boat_one_cm": 6683,
+      "minecraft:play_time": 104023,
+      "minecraft:jump": 219,
+      "minecraft:time_since_death": 2248,
+      "minecraft:sprint_one_cm": 6551,
+      "minecraft:open_chest": 1,
+      "minecraft:sleep_in_bed": 1,
+      "minecraft:fall_one_cm": 5578,
+      "minecraft:total_world_time": 104023,
+      "minecraft:fly_one_cm": 42049,
+      "minecraft:walk_on_water_one_cm": 3279,
+      "minecraft:crouch_one_cm": 336,
+      "minecraft:sneak_time": 305,
+      "minecraft:deaths": 10
+    },
+    "minecraft:mined": {
+      "minecraft:fern": 1,
+      "minecraft:spruce_planks": 1,
+      "minecraft:spruce_stairs": 1,
       "minecraft:oak_planks": 1
     },
     "minecraft:killed": {
       "minecraft:skeleton": 1
     },
-    "minecraft:killed_by": {
-      "minecraft:skeleton": 1,
-      "minecraft:player": 1,
-      "minecraft:spider": 1,
-      "minecraft:zombie": 3
+    "minecraft:used": {
+      "minecraft:cherry_boat": 1,
+      "minecraft:oak_planks": 1
     },
-    "minecraft:custom": {
-      "minecraft:time_since_rest": 20,
-      "minecraft:walk_one_cm": 15610,
-      "minecraft:leave_game": 14,
-      "minecraft:mob_kills": 1,
-      "minecraft:walk_under_water_one_cm": 300,
-      "minecraft:damage_taken": 1557,
-      "minecraft:damage_dealt": 225,
-      "minecraft:boat_one_cm": 6683,
-      "minecraft:play_time": 99740,
-      "minecraft:jump": 198,
-      "minecraft:time_since_death": 0,
-      "minecraft:sprint_one_cm": 5763,
-      "minecraft:open_chest": 1,
-      "minecraft:sleep_in_bed": 1,
-      "minecraft:fall_one_cm": 4473,
-      "minecraft:total_world_time": 99740,
-      "minecraft:fly_one_cm": 41493,
-      "minecraft:walk_on_water_one_cm": 3279,
-      "minecraft:crouch_one_cm": 336,
-      "minecraft:sneak_time": 305,
-      "minecraft:deaths": 6
+    "minecraft:killed_by": {
+      "minecraft:skeleton": 2,
+      "minecraft:player": 1,
+      "minecraft:creeper": 1,
+      "minecraft:spider": 1,
+      "minecraft:zombie": 5
     }
   },
   "DataVersion": 4903

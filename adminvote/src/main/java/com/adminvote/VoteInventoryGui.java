@@ -133,12 +133,15 @@ public final class VoteInventoryGui implements Listener {
             player.closeInventory();
             voteManager.recordVote(player, adminId, choice);
         } else if (slot == 8) {
-            // Switch to Dialog UI
+            // Switch to Dialog UI and save preference
             player.closeInventory();
-            AdminCommandVote vote = voteManager.getVote(adminId).orElse(null);
-            if (vote != null && dialogManager != null) {
-                dialogManager.showVoteDialog(player, vote, 0);
-                dialogManager.showVoteProgressBar(player, vote);
+            if (dialogManager != null) {
+                dialogManager.setPlayerPreference(player, true); // Save preference for Dialog UI
+                AdminCommandVote vote = voteManager.getVote(adminId).orElse(null);
+                if (vote != null) {
+                    dialogManager.showVoteDialog(player, vote, 0);
+                    dialogManager.showVoteProgressBar(player, vote);
+                }
             }
         }
     }

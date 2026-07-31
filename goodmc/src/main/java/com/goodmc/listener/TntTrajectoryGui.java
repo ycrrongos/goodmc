@@ -32,6 +32,7 @@ public final class TntTrajectoryGui implements Listener {
     private final Plugin plugin;
     private final TntThrowListener tntListener;
     private final Map<UUID, Boolean> openGuis = new HashMap<>();
+    private final Map<UUID, Boolean> playerUiPreference = new HashMap<>(); // true = Dialog, false = Chest
 
     public TntTrajectoryGui(Plugin plugin, TntThrowListener tntListener) {
         this.plugin = plugin;
@@ -39,14 +40,28 @@ public final class TntTrajectoryGui implements Listener {
     }
 
     public void openTrajectoryGui(Player player) {
-        openTrajectoryDialog(player);
+        // 检查玩家偏好，默认使用 Dialog UI
+        Boolean preferDialog = playerUiPreference.get(player.getUniqueId());
+        if (preferDialog == null || preferDialog) {
+            openTrajectoryDialog(player);
+        } else {
+            openTrajectoryChestGui(player);
+        }
     }
 
     public void openTrajectoryChest(Player player) {
+        // 保存玩家偏好为箱子 GUI
+        playerUiPreference.put(player.getUniqueId(), false);
         openTrajectoryChestGui(player);
     }
 
-    private void openTrajectoryDialog(Player player) {
+    public void openTrajectoryDialog(Player player) {
+        // 保存玩家偏好为 Dialog UI
+        playerUiPreference.put(player.getUniqueId(), true);
+        openTrajectoryDialogInternal(player);
+    }
+
+    private void openTrajectoryDialogInternal(Player player) {
         try {
             Dialog dialog = Dialog.create(builder -> builder.empty()
                     .base(io.papermc.paper.registry.data.dialog.DialogBase.builder(

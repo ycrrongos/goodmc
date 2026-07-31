@@ -37,8 +37,11 @@ public final class VoteSwitchGuiCommand implements CommandExecutor {
                 if (dialogManager != null) {
                     dialogManager.closeDialogFor(player);
                 }
-                // Open chest GUI
+                // Open chest GUI and save preference
                 if (voteGui != null) {
+                    if (dialogManager != null) {
+                        dialogManager.setPlayerPreference(player, false); // Save preference for Chest GUI
+                    }
                     int required = voteManager.config().requiredYesVotes(vote.command(), vote.eligibleCount(), org.bukkit.Bukkit.getOnlinePlayers().size());
                     voteGui.showVoteGui(player, vote, required);
                     if (dialogManager != null) {

@@ -34,6 +34,9 @@ public final class VoteDialogManager {
     /** BossBar progress bars for vote timeouts: player -> BossBar */
     private final Map<UUID, BossBar> voteProgressBars = new ConcurrentHashMap<>();
 
+    /** Player UI preferences: true = Dialog, false = Chest */
+    private final Map<UUID, Boolean> playerUiPreference = new ConcurrentHashMap<>();
+
     public VoteDialogManager(JavaPlugin plugin, AdminCommandVoteManager voteManager) {
         this.plugin = plugin;
         this.voteManager = voteManager;
@@ -41,6 +44,35 @@ public final class VoteDialogManager {
 
     public void setVoteGui(VoteInventoryGui voteGui) {
         this.voteGui = voteGui;
+    }
+
+    /**
+     * Show vote UI to a player based on their preference.
+     */
+    public void showVoteUi(Player player, AdminCommandVote vote, int required) {
+        Boolean preferDialog = playerUiPreference.get(player.getUniqueId());
+        if (preferDialog == null || preferDialog) {
+            // Default to Dialog UI
+            if (!showVoteDialog(player, vote, required)) {
+                // Fallback to chest GUI if dialog fails
+                playerUiPreference.put(player.getUniqueId(), false);
+                if (voteGui != null) {
+                    voteGui.showVoteGui(player, vote, required);
+                }
+            }
+        } else {
+            // Use chest GUI
+            if (voteGui != null) {
+                voteGui.showVoteGui(player, vote, required);
+            }
+        }
+    }
+
+    /**
+     * Set player's UI preference for vote UI.
+     */
+    public void setPlayerPreference(Player player, boolean preferDialog) {
+        playerUiPreference.put(player.getUniqueId(), preferDialog);
     }
 
     /**
