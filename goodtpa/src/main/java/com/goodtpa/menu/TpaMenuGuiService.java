@@ -57,37 +57,37 @@ public final class TpaMenuGuiService {
                             ActionButton.builder(Component.text("传送到玩家", TextColor.color(0x55FF55)))
                                     .tooltip(Component.text("打开玩家选择器"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("tpa_menu_open tpa")))
+                                            ClickEvent.runCommand("/tpa_menu_open tpa")))
                                     .build(),
                             ActionButton.builder(Component.text("召唤玩家", TextColor.color(0x55FF55)))
                                     .tooltip(Component.text("打开玩家选择器"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("tpa_menu_open tpahere")))
+                                            ClickEvent.runCommand("/tpa_menu_open tpahere")))
                                     .build(),
                             ActionButton.builder(Component.text("接受传送", TextColor.color(0x55FF55)))
                                     .tooltip(Component.text("打开请求者列表"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("tpa_menu_open tpaccept")))
+                                            ClickEvent.runCommand("/tpa_menu_open tpaccept")))
                                     .build(),
                             ActionButton.builder(Component.text("拒绝传送", TextColor.color(0xFF5555)))
                                     .tooltip(Component.text("打开请求者列表"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("tpa_menu_open tpdeny")))
+                                            ClickEvent.runCommand("/tpa_menu_open tpdeny")))
                                     .build(),
                             ActionButton.builder(Component.text("返回传送点", TextColor.color(0xFFFF55)))
                                     .tooltip(Component.text("等同 /tpaback"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("tpaback")))
+                                            ClickEvent.runCommand("/tpaback")))
                                     .build(),
                             ActionButton.builder(Component.text("返回死亡点", TextColor.color(0xFFFF55)))
                                     .tooltip(Component.text("等同 /back"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("back")))
+                                            ClickEvent.runCommand("/back")))
                                     .build()
                     ), ActionButton.builder(Component.text("切换箱子 UI", TextColor.color(0x55FFFF)))
                             .tooltip(Component.text("点击切换到箱子 GUI 界面"))
                             .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                    ClickEvent.runCommand("tpamenu")))
+                                    ClickEvent.runCommand("/tpamenu")))
                             .build(), 3))
             );
             player.showDialog(dialog);
