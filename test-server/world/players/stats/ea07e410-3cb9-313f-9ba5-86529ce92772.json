@@ -1,0 +1,22 @@
+{
+  "stats": {
+    "minecraft:killed_by": {
+      "minecraft:player": 3,
+      "minecraft:pillager": 1
+    },
+    "minecraft:picked_up": {
+      "minecraft:lever": 4
+    },
+    "minecraft:custom": {
+      "minecraft:time_since_rest": 0,
+      "minecraft:total_world_time": 4740,
+      "minecraft:leave_game": 8,
+      "minecraft:damage_taken": 2183,
+      "minecraft:play_time": 4740,
+      "minecraft:deaths": 7,
+      "minecraft:jump": 86,
+      "minecraft:time_since_death": 0
+    }
+  },
+  "DataVersion": 4903
+}

@@ -72,6 +72,9 @@ public final class FakeServerPlayer extends ServerPlayer {
         fake.gameMode.changeGameModeForPlayer(gameType);
         fake.getEntityData().set(DATA_PLAYER_MODE_CUSTOMISATION, (byte) 0x7f);
         fake.setHealth(20.0F);
+        // Enable physics for knockback
+        fake.noPhysics = false;
+        fake.setInvulnerable(false);
         return fake;
     }
 
@@ -100,6 +103,11 @@ public final class FakeServerPlayer extends ServerPlayer {
             super.tick();
             this.doTick();
             actionPack.onUpdate();
+            // Apply knockback velocity
+            if (hurtMarked) {
+                hurtMarked = false;
+                // Velocity is already applied by the damage system
+            }
         } catch (NullPointerException ignored) {
             // Paper edge cases with fake connections
         }
