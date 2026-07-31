@@ -77,8 +77,17 @@ public final class FakeServerPlayer extends ServerPlayer {
 
     public void discard(Component reason) {
         if (connection != null) {
-            connection.disconnect(reason);
+            // Mark as removed first
+            setRemoved(net.minecraft.world.entity.Entity.RemovalReason.DISCARDED);
+            // Disconnect the fake connection
+            try {
+                connection.disconnect(reason);
+            } catch (Exception ignored) {
+                // Fake connection may throw
+            }
         }
+        // Remove from server player list
+        level().getServer().getPlayerList().remove(this);
     }
 
     @Override
