@@ -27,6 +27,9 @@ commands:
   tpamenu:
     description: 打开传送菜单
     usage: /tpamenu
+  tpamenu_chest:
+    description: 打开传送菜单（箱子 GUI）
+    usage: /tpamenu_chest
   tpa_menu_open:
     description: 打开传送菜单玩家选择器（Dialog UI 用）
     usage: /tpa_menu_open <tpa|tpahere|tpaccept|tpdeny>

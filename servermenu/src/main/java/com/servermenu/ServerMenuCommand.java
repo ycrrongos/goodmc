@@ -54,6 +54,11 @@ public final class ServerMenuCommand implements CommandExecutor {
             return true;
         }
 
+        if (args.length == 1 && args[0].equalsIgnoreCase("chest")) {
+            guiService.openMainChest(player);
+            return true;
+        }
+
         player.getInventory().addItem(MenuItems.createMenuItem(plugin));
         player.sendMessage(Component.text("已领取服务器菜单物品，右键打开。", NamedTextColor.GREEN));
         return true;

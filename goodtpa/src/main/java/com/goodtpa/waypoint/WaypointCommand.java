@@ -44,6 +44,11 @@ public final class WaypointCommand implements CommandExecutor {
             return true;
         }
 
+        if (args.length >= 1 && args[0].equalsIgnoreCase("chest")) {
+            guiService.openWaypointChest(player, WaypointTab.PUBLIC, 0);
+            return true;
+        }
+
         if (args.length >= 1) {
             WaypointTab tab = switch (args[0].toLowerCase()) {
                 case "public" -> WaypointTab.PUBLIC;

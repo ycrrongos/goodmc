@@ -35,11 +35,11 @@ public final class TpaMenuGuiService {
     }
 
     public void openMain(Player player) {
-        if (DialogApiUtil.isAvailable()) {
-            openMainDialog(player);
-        } else {
-            openMainChestGui(player);
-        }
+        openMainDialog(player);
+    }
+
+    public void openMainChest(Player player) {
+        openMainChestGui(player);
     }
 
     private void openMainDialog(Player player) {
@@ -87,7 +87,7 @@ public final class TpaMenuGuiService {
                     ), ActionButton.builder(Component.text("切换箱子 UI", TextColor.color(0x55FFFF)))
                             .tooltip(Component.text("点击切换到箱子 GUI 界面"))
                             .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                    ClickEvent.runCommand("/tpamenu")))
+                                    ClickEvent.runCommand("/tpamenu_chest")))
                             .build(), 3))
             );
             player.showDialog(dialog);

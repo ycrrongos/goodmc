@@ -76,6 +76,14 @@ public final class GoodTpaPlugin extends JavaPlugin {
             }
             return true;
         }, null);
+        registerIfEnabled("tpamenu_chest", (sender, command, label, args) -> {
+            if (sender instanceof Player player) {
+                tpaMenuGuiService.openMainChest(player);
+            } else {
+                sender.sendMessage("该指令只能由玩家使用。");
+            }
+            return true;
+        }, null);
         registerIfEnabled("tpa_menu_open", new TpaMenuOpenCommand(tpaMenuGuiService), null);
         registerIfEnabled("back", new DeathBackCommand(deathBackManager), null);
 

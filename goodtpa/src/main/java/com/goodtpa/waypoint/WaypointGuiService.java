@@ -58,6 +58,10 @@ public final class WaypointGuiService {
         }
     }
 
+    public void openWaypointChest(Player player, WaypointTab tab, int page) {
+        openWaypointChestGui(player, tab, page);
+    }
+
     private void openWaypointDialog(Player player) {
         try {
             Dialog dialog = Dialog.create(builder -> builder.empty()
@@ -93,7 +97,7 @@ public final class WaypointGuiService {
                     ), ActionButton.builder(Component.text("切换箱子 UI", TextColor.color(0x55FFFF)))
                             .tooltip(Component.text("点击切换到箱子 GUI 界面"))
                             .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                    ClickEvent.runCommand("waypoint")))
+                                    ClickEvent.runCommand("/waypoint chest")))
                             .build(), 2))
             );
             player.showDialog(dialog);
