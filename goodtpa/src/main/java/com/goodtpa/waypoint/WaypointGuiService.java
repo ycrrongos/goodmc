@@ -73,27 +73,27 @@ public final class WaypointGuiService {
                             ActionButton.builder(Component.text("公开路径点", TextColor.color(0x55FF55)))
                                     .tooltip(Component.text("查看公开路径点"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("/waypoint public")))
+                                            ClickEvent.runCommand("waypoint public")))
                                     .build(),
                             ActionButton.builder(Component.text("私有路径点", TextColor.color(0xFF55FF)))
                                     .tooltip(Component.text("查看你的私有路径点"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("/waypoint private")))
+                                            ClickEvent.runCommand("waypoint private")))
                                     .build(),
                             ActionButton.builder(Component.text("创建路径点", TextColor.color(0xFFFF55)))
                                     .tooltip(Component.text("创建新的路径点"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("/waypoint create")))
+                                            ClickEvent.runCommand("waypoint create")))
                                     .build(),
                             ActionButton.builder(Component.text("返回传送前位置", TextColor.color(0x55FFFF)))
                                     .tooltip(Component.text("等同 /waypoint back"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("/waypoint back")))
+                                            ClickEvent.runCommand("waypoint back")))
                                     .build()
                     ), ActionButton.builder(Component.text("切换箱子 UI", TextColor.color(0x55FFFF)))
                             .tooltip(Component.text("点击切换到箱子 GUI 界面"))
                             .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                    ClickEvent.runCommand("/waypoint")))
+                                    ClickEvent.runCommand("waypoint")))
                             .build(), 2))
             );
             player.showDialog(dialog);

@@ -77,22 +77,22 @@ public final class VoteDialogManager {
                             ActionButton.builder(Component.text("同意", TextColor.color(0x55FF55)))
                                     .tooltip(Component.text("点击同意执行该指令"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            net.kyori.adventure.text.event.ClickEvent.runCommand("/adminvote yes " + adminName)))
+                                            net.kyori.adventure.text.event.ClickEvent.runCommand("adminvote yes " + adminName)))
                                     .build(),
                             ActionButton.builder(Component.text("拒绝", TextColor.color(0xFF5555)))
                                     .tooltip(Component.text("点击拒绝该指令"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            net.kyori.adventure.text.event.ClickEvent.runCommand("/adminvote no " + adminName)))
+                                            net.kyori.adventure.text.event.ClickEvent.runCommand("adminvote no " + adminName)))
                                     .build(),
                             ActionButton.builder(Component.text("弃权", TextColor.color(0xAAAAAA)))
                                     .tooltip(Component.text("点击弃权，不计入投票"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            net.kyori.adventure.text.event.ClickEvent.runCommand("/adminvote abstain " + adminName)))
+                                            net.kyori.adventure.text.event.ClickEvent.runCommand("adminvote abstain " + adminName)))
                                     .build()
-                    ), ActionButton.builder(Component.text("切换箱子UI", TextColor.color(0x55FFFF)))
-                            .tooltip(Component.text("点击切换到箱子GUI界面"))
+                    ), ActionButton.builder(Component.text("切换箱子 UI", TextColor.color(0x55FFFF)))
+                            .tooltip(Component.text("点击切换到箱子 GUI 界面"))
                             .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                    net.kyori.adventure.text.event.ClickEvent.runCommand("/vote_switch_gui")))
+                                    net.kyori.adventure.text.event.ClickEvent.runCommand("vote_switch_gui")))
                             .build(), 5))  // 5 columns to make buttons smaller
             );
 

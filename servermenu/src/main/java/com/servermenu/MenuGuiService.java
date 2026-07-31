@@ -59,7 +59,7 @@ public final class MenuGuiService {
                     ActionButton.builder(Component.text("切换箱子 UI", TextColor.color(0x55FFFF)))
                             .tooltip(Component.text("点击切换到箱子 GUI 界面"))
                             .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                    ClickEvent.runCommand("/servermenu open")))
+                                    ClickEvent.runCommand("servermenu open")))
                             .build()
             );
 

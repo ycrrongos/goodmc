@@ -62,27 +62,27 @@ public final class TntTrajectoryGui implements Listener {
                             ActionButton.builder(Component.text("末影珍珠", TextColor.color(0x55FFFF)))
                                     .tooltip(Component.text("使用末影珍珠抛物线"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("/tnt_traj ENDER_PEARL")))
+                                            ClickEvent.runCommand("tnt_traj ENDER_PEARL")))
                                     .build(),
                             ActionButton.builder(Component.text("弓", TextColor.color(0xFFAA00)))
                                     .tooltip(Component.text("使用弓抛物线"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("/tnt_traj BOW")))
+                                            ClickEvent.runCommand("tnt_traj BOW")))
                                     .build(),
                             ActionButton.builder(Component.text("弩", TextColor.color(0xFFAA00)))
                                     .tooltip(Component.text("使用弩抛物线"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("/tnt_traj CROSSBOW")))
+                                            ClickEvent.runCommand("tnt_traj CROSSBOW")))
                                     .build(),
                             ActionButton.builder(Component.text("雪球", TextColor.color(0xFFFFFF)))
                                     .tooltip(Component.text("使用雪球抛物线"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("/tnt_traj SNOWBALL")))
+                                            ClickEvent.runCommand("tnt_traj SNOWBALL")))
                                     .build()
                     ), ActionButton.builder(Component.text("切换箱子 UI", TextColor.color(0x55FFFF)))
                             .tooltip(Component.text("点击切换到箱子 GUI 界面"))
                             .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                    ClickEvent.runCommand("/tnt_gui")))
+                                    ClickEvent.runCommand("tnt_gui")))
                             .build(), 5))
             );
             player.showDialog(dialog);
