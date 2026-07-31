@@ -1,6 +1,5 @@
 package com.goodmc.listener;
 
-import com.goodmc.util.DialogApiUtil;
 import io.papermc.paper.dialog.Dialog;
 import io.papermc.paper.registry.data.dialog.ActionButton;
 import io.papermc.paper.registry.data.dialog.body.DialogBody;
@@ -40,11 +39,11 @@ public final class TntTrajectoryGui implements Listener {
     }
 
     public void openTrajectoryGui(Player player) {
-        if (DialogApiUtil.isAvailable()) {
-            openTrajectoryDialog(player);
-        } else {
-            openTrajectoryChestGui(player);
-        }
+        openTrajectoryDialog(player);
+    }
+
+    public void openTrajectoryChest(Player player) {
+        openTrajectoryChestGui(player);
     }
 
     private void openTrajectoryDialog(Player player) {
@@ -62,27 +61,27 @@ public final class TntTrajectoryGui implements Listener {
                             ActionButton.builder(Component.text("末影珍珠", TextColor.color(0x55FFFF)))
                                     .tooltip(Component.text("使用末影珍珠抛物线"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("tnt_traj ENDER_PEARL")))
+                                            ClickEvent.runCommand("/tnt_traj ENDER_PEARL")))
                                     .build(),
                             ActionButton.builder(Component.text("弓", TextColor.color(0xFFAA00)))
                                     .tooltip(Component.text("使用弓抛物线"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("tnt_traj BOW")))
+                                            ClickEvent.runCommand("/tnt_traj BOW")))
                                     .build(),
                             ActionButton.builder(Component.text("弩", TextColor.color(0xFFAA00)))
                                     .tooltip(Component.text("使用弩抛物线"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("tnt_traj CROSSBOW")))
+                                            ClickEvent.runCommand("/tnt_traj CROSSBOW")))
                                     .build(),
                             ActionButton.builder(Component.text("雪球", TextColor.color(0xFFFFFF)))
                                     .tooltip(Component.text("使用雪球抛物线"))
                                     .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                            ClickEvent.runCommand("tnt_traj SNOWBALL")))
+                                            ClickEvent.runCommand("/tnt_traj SNOWBALL")))
                                     .build()
                     ), ActionButton.builder(Component.text("切换箱子 UI", TextColor.color(0x55FFFF)))
                             .tooltip(Component.text("点击切换到箱子 GUI 界面"))
                             .action(io.papermc.paper.registry.data.dialog.action.DialogAction.staticAction(
-                                    ClickEvent.runCommand("tnt_gui")))
+                                    ClickEvent.runCommand("/tnt_gui_chest")))
                             .build(), 5))
             );
             player.showDialog(dialog);
@@ -179,9 +178,7 @@ public final class TntTrajectoryGui implements Listener {
         } else if (slot == 8) {
             // Switch to Dialog UI
             player.closeInventory();
-            if (DialogApiUtil.isAvailable()) {
-                openTrajectoryDialog(player);
-            }
+            openTrajectoryDialog(player);
         }
     }
 

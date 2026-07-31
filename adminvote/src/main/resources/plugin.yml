@@ -21,6 +21,9 @@ commands:
   vote_switch_gui:
     description: 切换投票界面到箱子GUI
     usage: /vote_switch_gui
+  vote_switch_gui_chest:
+    description: 切换投票界面到箱子GUI（直接打开）
+    usage: /vote_switch_gui_chest
 
 permissions:
   goodmc.bypass:

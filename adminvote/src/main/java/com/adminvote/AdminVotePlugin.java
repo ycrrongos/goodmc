@@ -81,6 +81,7 @@ public final class AdminVotePlugin extends JavaPlugin {
             registerCommand("vote", new VoteManageCommand(this, voteManager), null);
         }
         registerCommand("vote_switch_gui", new VoteSwitchGuiCommand(voteManager, dialogManager, voteGui), null);
+        registerCommand("vote_switch_gui_chest", new VoteSwitchGuiCommand(voteManager, dialogManager, voteGui, true), null);
 
         getLogger().info("AdminVote enabled (with Fabric mod bridge)");
     }

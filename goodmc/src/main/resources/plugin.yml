@@ -25,6 +25,9 @@ commands:
   tnt_gui:
     description: 打开TNT抛物线选择界面
     usage: /tnt_gui
+  tnt_gui_chest:
+    description: 打开TNT抛物线选择界面（箱子 GUI）
+    usage: /tnt_gui_chest
   fireball_unlock:
     description: 解锁火球丢出保护锁
     usage: /fireball_unlock

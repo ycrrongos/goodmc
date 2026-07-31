@@ -4,6 +4,7 @@ import com.goodmc.command.FireballUnlockCommand;
 import com.goodmc.command.KillCommand;
 import com.goodmc.command.ScCommand;
 import com.goodmc.command.SeedCommand;
+import com.goodmc.command.TntGuiChestCommand;
 import com.goodmc.command.TntGuiCommand;
 import com.goodmc.command.TntTrajCommand;
 import com.goodmc.command.TntUnlockCommand;
@@ -43,6 +44,7 @@ public final class GoodMCPlugin extends JavaPlugin {
         registerCommand("tnt_unlock", new TntUnlockCommand(tntListener));
         registerCommand("tnt_traj", new TntTrajCommand(tntListener));
         registerCommand("tnt_gui", new TntGuiCommand(tntListener));
+        registerCommand("tnt_gui_chest", new TntGuiChestCommand(tntListener));
         
         FireChargeListener fireChargeListener = new FireChargeListener();
         pm.registerEvents(fireChargeListener, this);

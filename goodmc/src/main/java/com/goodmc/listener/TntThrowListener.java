@@ -207,6 +207,12 @@ public final class TntThrowListener implements Listener {
         }
     }
 
+    public void openTrajectoryChest(Player player) {
+        if (trajectoryGui != null) {
+            trajectoryGui.openTrajectoryChest(player);
+        }
+    }
+
     private static Vector sampleVelocity(Player player, Trajectory trajectory) {
         Projectile proj = player.launchProjectile(trajectory.getProjectileClass());
         Vector velocity = proj.getVelocity().clone();

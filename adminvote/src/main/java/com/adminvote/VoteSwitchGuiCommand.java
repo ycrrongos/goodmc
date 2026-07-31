@@ -10,11 +10,17 @@ public final class VoteSwitchGuiCommand implements CommandExecutor {
     private final AdminCommandVoteManager voteManager;
     private final VoteDialogManager dialogManager;
     private final VoteInventoryGui voteGui;
+    private final boolean forceChest;
 
     public VoteSwitchGuiCommand(AdminCommandVoteManager voteManager, VoteDialogManager dialogManager, VoteInventoryGui voteGui) {
+        this(voteManager, dialogManager, voteGui, false);
+    }
+
+    public VoteSwitchGuiCommand(AdminCommandVoteManager voteManager, VoteDialogManager dialogManager, VoteInventoryGui voteGui, boolean forceChest) {
         this.voteManager = voteManager;
         this.dialogManager = dialogManager;
         this.voteGui = voteGui;
+        this.forceChest = forceChest;
     }
 
     @Override
