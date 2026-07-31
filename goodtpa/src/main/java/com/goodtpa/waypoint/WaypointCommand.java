@@ -44,6 +44,19 @@ public final class WaypointCommand implements CommandExecutor {
             return true;
         }
 
+        if (args.length >= 1) {
+            WaypointTab tab = switch (args[0].toLowerCase()) {
+                case "public" -> WaypointTab.PUBLIC;
+                case "private" -> WaypointTab.PRIVATE;
+                case "create" -> WaypointTab.CREATE;
+                default -> null;
+            };
+            if (tab != null) {
+                guiService.open(player, tab);
+                return true;
+            }
+        }
+
         guiService.open(player, WaypointTab.PUBLIC);
         return true;
     }

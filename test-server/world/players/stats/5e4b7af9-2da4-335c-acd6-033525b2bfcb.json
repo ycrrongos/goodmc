@@ -10,7 +10,7 @@
     "minecraft:custom": {
       "minecraft:time_since_rest": 20,
       "minecraft:walk_one_cm": 10380,
-      "minecraft:leave_game": 6,
+      "minecraft:leave_game": 7,
       "minecraft:mob_kills": 1,
       "minecraft:walk_under_water_one_cm": 300,
       "minecraft:damage_taken": 1057,
